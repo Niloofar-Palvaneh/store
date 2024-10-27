@@ -4,7 +4,6 @@ import TodoCard from './todoCard';
 import { todos } from './todo.types';
 
 const TodoWrapper: React.FC = () => {
-    // Initialize allTodos as an array of todos
     const [allTodos, setAllTodos] = useState<todos[]>([]);
     const [newTodoTitle, setNewTodoTitle] = useState<string>("");
 
@@ -42,7 +41,7 @@ const TodoWrapper: React.FC = () => {
             </div>
             <div className='grid grid-cols-1 gap-2'>
                 {allTodos.map(todo => (
-                    <div onClick={() => changeTodoStatusHandler(todo.id)}>
+                    <div onClick={() => changeTodoStatusHandler(todo.id)} className='cursor-pointer z-30'>
                         <TodoCard key={todo.id} {...todo} />
                     </div>
                 ))}
