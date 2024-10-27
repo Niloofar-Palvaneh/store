@@ -1,13 +1,12 @@
 "use client"
-import CardsWrapper from '@/components/CardsWrapper';
-import Image from 'next/image'
-import { useEffect, useState } from 'react'
+
+import TodoWrapper from "@/components/todoWrapper"
 
 export default function Home() {
 
   return (
     <>
-      <CardsWrapper />
+    <TodoWrapper/>
     </>
   )
 }
