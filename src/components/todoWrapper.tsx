@@ -13,33 +13,38 @@ const TodoWrapper: React.FC = () => {
     };
 
     const addTodoHandler = () => {
-        if (newTodoTitle.trim() === "") return; // Prevent adding empty todos
+        if (newTodoTitle.trim() === "") return;
         const newTodo = {
             id: Math.floor(Math.random() * 1000) + 1,
             title: newTodoTitle,
             isCompleted: false
         };
-        setAllTodos(prevTodos => [...prevTodos, newTodo]); // Append new todo to the existing array
-        setNewTodoTitle(""); // Clear the input after adding
+        setAllTodos(prevTodos => [...prevTodos, newTodo]);
+        setNewTodoTitle("");
     };
-
-    console.log(allTodos);
-
+    const changeTodoStatusHandler = (id: number) => {
+        const updatedTodos = allTodos.map(todo =>
+            todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
+        );
+        setAllTodos(updatedTodos)
+    }
     return (
         <div className='p-12'>
             <div>
                 <h1>TODO LIST</h1>
-                <input 
-                    value={newTodoTitle} 
-                    onChange={setNewTodoTitleHandler} 
-                    type="text" 
-                    placeholder='You can add a todo' 
+                <input
+                    value={newTodoTitle}
+                    onChange={setNewTodoTitleHandler}
+                    type="text"
+                    placeholder='You can add a todo'
                 />
                 <button className='border-2 p-2' onClick={addTodoHandler}>Add</button>
             </div>
             <div className='grid grid-cols-1 gap-2'>
                 {allTodos.map(todo => (
-                    <TodoCard key={todo.id} {...todo} /> // Pass each todo to TodoCard
+                    <div onClick={() => changeTodoStatusHandler(todo.id)}>
+                        <TodoCard key={todo.id} {...todo} />
+                    </div>
                 ))}
             </div>
         </div>
